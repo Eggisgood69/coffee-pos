@@ -1,10 +1,10 @@
 spring:
   application:
-    name: Coffee_pos
+    name: coffee-pos
   jpa:
     show-sql: true
   datasource:
-    url: jdbc:mysql://localhost:3306/Coffee_pos
+    url: jdbc:mysql://localhost:3307/coffee-pos
     username: root
     password: my-secret-pw
     driver-class-name: com.mysql.cj.jdbc.Driver
