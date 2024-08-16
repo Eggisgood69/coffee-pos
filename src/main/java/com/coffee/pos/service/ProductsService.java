@@ -25,7 +25,7 @@ public class ProductsService {
         return productsRepository.save(newProducts);
     }
 
-    public Products save(Products products){
+    public Products save(Products products) {
         return productsRepository.save(products);
     }
 
@@ -41,8 +41,8 @@ public class ProductsService {
         Products newProducts = new Products();
         newProducts.setName(products.getName());
         newProducts.setDescription(products.getDescription());
-        newProducts.setCreate_at(LocalDateTime.now());
-        newProducts.setUpdate_at(LocalDateTime.now());
+        newProducts.setCreateAt(LocalDateTime.now());
+        newProducts.setUpdateAt(LocalDateTime.now());
         return newProducts;
     }
 }

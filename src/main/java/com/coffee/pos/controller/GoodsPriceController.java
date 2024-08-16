@@ -14,13 +14,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+
 import java.time.LocalDateTime;
 
 
 @RestController
 @RequestMapping("api/v1/good_price")
 public class GoodsPriceController {
-    @Autowired GoodsPriceService goodsPriceService;
+    @Autowired
+    GoodsPriceService goodsPriceService;
 
     @GetMapping("/{id}")
     public ResponseEntity<CommonObjectResponse> getGoodsPriceById(@PathVariable String id) {
@@ -59,10 +61,10 @@ public class GoodsPriceController {
         Sort.Direction direction =
                 sortDirection.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
 
-        Pageable pageable = PageRequest.of(page-1,size,Sort.by(direction,sort));
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.by(direction, sort));
         Page<GoodsPrice> goodsPriceList;
-        if(goods_id != null && !goods_id.isEmpty()) {
-            goodsPriceList = goodsPriceService.findByGoodsById(goods_id,pageable);
+        if (goods_id != null && !goods_id.isEmpty()) {
+            goodsPriceList = goodsPriceService.findByGoodsById(goods_id, pageable);
         } else {
             goodsPriceList = goodsPriceService.getAll(pageable);
         }
@@ -73,7 +75,7 @@ public class GoodsPriceController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<CommonObjectResponse> updatePrice(
-            @PathVariable String id, @RequestParam int price, @RequestBody CreateGoodsPriceDTO createGoodsPriceDTO) {
+            @PathVariable String id, @RequestParam int price) {
         GoodsPrice existingGoodsPrice = goodsPriceService.queryById(id);
         if (existingGoodsPrice != null) {
             existingGoodsPrice.setPrice(price);
