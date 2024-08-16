@@ -14,13 +14,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/products")
 public class ProductsController {
 
-    @Autowired private ProductsService productsService;
+    @Autowired
+    private ProductsService productsService;
 
     @GetMapping
     public ResponseEntity<CommonListResponse<Products>> getProducts(
@@ -37,7 +39,7 @@ public class ProductsController {
         Page<Products> productsList;
         if (name != null && !name.isEmpty()) {
             productsList = productsService.findByName(name, pageable);
-        }else {
+        } else {
             productsList = productsService.getAll(pageable);
         }
         CommonListResponse<Products> response = new CommonListResponse<>("Success", CommonStatus.SUCCESS, productsList);
@@ -70,7 +72,7 @@ public class ProductsController {
         if (createProductsDTO.getDescription() != null) {
             existProducts.setDescription(createProductsDTO.getDescription());
         }
-        existProducts.setUpdate_at(LocalDateTime.now());
+        existProducts.setUpdateAt(LocalDateTime.now());
         existProducts = productsService.save(existProducts);
         CommonObjectResponse response = new CommonObjectResponse("Success", CommonStatus.SUCCESS, existProducts);
         return new ResponseEntity<>(response, HttpStatus.OK);
